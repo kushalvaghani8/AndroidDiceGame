@@ -15,16 +15,17 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/scoreLabel"
+            android:id="@+id/resultLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:ems="5"
             android:layout_gravity="center"
-            android:inputType="textPersonName"
+            android:textSize="18sp"
+            android:textColor="@color/blue"
+            android:inputType="textImeMultiLine"
             android:text="" />
 
     <Spinner
-        android:id="@+id/planets_spinner"
+        android:id="@+id/dice_spinner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center" />
@@ -32,6 +33,7 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:orientation="horizontal">
 
     <Button
@@ -60,7 +62,7 @@
 
 
         <EditText
-            android:id="@+id/addEt"
+            android:id="@+id/addDiceText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="3"
@@ -68,7 +70,7 @@
             android:text="" />
 
         <Button
-            android:id="@+id/addBtn"
+            android:id="@+id/addDiceBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Add"
@@ -76,14 +78,13 @@
             tools:layout_editor_absoluteY="339dp" />
 </LinearLayout>
 
-        <TextView
-            android:id="@+id/historyLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ems="5"
-            android:layout_gravity="center"
-            android:inputType="textPersonName"
-            android:text="History:" />
+    <TextView
+        android:id="@+id/historyLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:inputType="textMultiLine"
+        android:text="History:" />
 
 
 </LinearLayout>

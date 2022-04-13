@@ -1,12 +1,3 @@
 <resources>
     <string name="app_name">Android Dice Game</string>
-    <string-array name="dice_array">
-        <item>2</item>
-        <item>4</item>
-        <item>6</item>
-        <item>8</item>
-        <item>10</item>
-        <item>12</item>
-        <item>20</item>
-    </string-array>
 </resources>
