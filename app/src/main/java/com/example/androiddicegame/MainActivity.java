@@ -32,6 +32,8 @@ public class MainActivity extends AppCompatActivity {
     EditText addDiceText;
     TextView historyLabel, resultLabel;
     Spinner dice_spinner;
+    SharedPreferences sharedPreferences;
+    Context context;
 
 
     Integer dice[] = new Integer[]{ 2, 4, 6, 8, 10, 12, 20}; //adding the default dice values
@@ -47,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        loadData();
 
         spin1btn = (Button) findViewById(R.id.spin1btn);
         spin2btn = (Button) findViewById(R.id.spin2btn);
@@ -66,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+
                 if (addDiceText.getText().toString().equals("")) {
                     Toast.makeText(getApplicationContext(),"Oops forgot to enter a number, try again",Toast.LENGTH_SHORT).show();
                 } else if (addDiceText.getText().toString().equals("0") || addDiceText.getText().toString().equals("00") || addDiceText.getText().toString().equals("000")|| addDiceText.getText().toString().equals("0000")|| addDiceText.getText().toString().equals("00000") || addDiceText.getText().toString().equals("000000")) {
@@ -75,6 +79,17 @@ public class MainActivity extends AppCompatActivity {
                     int diceText = Integer.parseInt(String.valueOf(addDiceText.getText()));
                     if (!diceList.contains(diceText)){ //checking for 0 values & adding the number only if its not in the list
                         diceList.add(diceText); //adding the items to list
+
+                        /*----------------------------------------------
+                            Adding to shared preference
+                        -------------------------------------------------*/
+                        sharedPreferences = getSharedPreferences("SHARED_PREF",Context.MODE_PRIVATE);
+                        int diceNumber = Integer.parseInt(String.valueOf(addDiceText.getText()));
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putInt("dList", diceNumber);
+                        editor.apply();
+
+
                         adapter.notifyDataSetChanged(); //letting the spinner adapter know about data change to let them add new item
                         dice_spinner.setAdapter(adapter); //setting spinner adapter
                         int spinnerPosition = adapter.getPosition(diceText);  //getting the spinner position/number
@@ -142,6 +157,16 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
+    }
+
+    private void loadData() {
+        sharedPreferences = getSharedPreferences("SHARED_PREF",Context.MODE_PRIVATE);
+        int diceNumber = sharedPreferences.getInt("dList",0);
+        diceList.add(diceNumber);
+        if (diceList == null){
+            diceList = new ArrayList(Arrays.asList(dice));
+        }
 
     }
 

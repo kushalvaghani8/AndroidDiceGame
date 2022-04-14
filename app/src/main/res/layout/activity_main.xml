@@ -8,6 +8,18 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
+
+    <TextView
+        android:id="@+id/welcomeLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="80dp"
+        android:textSize="28sp"
+        android:textColor="@color/black"
+        android:text="Welcome to Dice Game" />
+
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
