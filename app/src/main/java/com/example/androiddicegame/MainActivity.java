@@ -1,13 +1,9 @@
 package com.example.androiddicegame;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
-import android.view.autofill.AutofillValue;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,16 +11,10 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
+import androidx.appcompat.app.AppCompatActivity;
 
-import org.w3c.dom.Text;
-
-import java.lang.reflect.Array;
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Comparator;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -49,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        loadData();
+        loadData(); //loading the data from shared preference
 
         spin1btn = (Button) findViewById(R.id.spin1btn);
         spin2btn = (Button) findViewById(R.id.spin2btn);
@@ -59,8 +49,8 @@ public class MainActivity extends AppCompatActivity {
         resultLabel = (TextView) findViewById(R.id.resultLabel);
         dice_spinner = (Spinner) findViewById(R.id.dice_spinner);
 
-        ArrayAdapter<Integer> adapter = new ArrayAdapter<Integer>(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, diceList);
-        dice_spinner.setAdapter(adapter);
+        ArrayAdapter<Integer> adapter = new ArrayAdapter<Integer>(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, diceList); //dropdown adapter and passing the array list
+        dice_spinner.setAdapter(adapter); //setting the adapter to our spinner
 
                 /*----------------------------------------------
                             Adding new item to spinner
@@ -69,15 +59,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-
-                if (addDiceText.getText().toString().equals("")) {
+                if (addDiceText.getText().toString().equals("")) { //checking if the field is empty
                     Toast.makeText(getApplicationContext(),"Oops forgot to enter a number, try again",Toast.LENGTH_SHORT).show();
                 } else if (addDiceText.getText().toString().equals("0") || addDiceText.getText().toString().equals("00") || addDiceText.getText().toString().equals("000")|| addDiceText.getText().toString().equals("0000")|| addDiceText.getText().toString().equals("00000") || addDiceText.getText().toString().equals("000000")) {
                     Toast.makeText(getApplicationContext(),"😱 Really!!!, try again",Toast.LENGTH_SHORT).show();
-                    addDiceText.setText("");
+                    addDiceText.setText(""); //checking for zero's and not adding them to list
                 } else {
                     int diceText = Integer.parseInt(String.valueOf(addDiceText.getText()));
-                    if (!diceList.contains(diceText)){ //checking for 0 values & adding the number only if its not in the list
+                    if (!diceList.contains(diceText)){
                         diceList.add(diceText); //adding the items to list
 
                         /*----------------------------------------------
@@ -88,6 +77,10 @@ public class MainActivity extends AppCompatActivity {
                         SharedPreferences.Editor editor = sharedPreferences.edit();
                         editor.putInt("dList", diceNumber);
                         editor.apply();
+
+                        /*----------------------------------------------
+
+                        -------------------------------------------------*/
 
 
                         adapter.notifyDataSetChanged(); //letting the spinner adapter know about data change to let them add new item
